@@ -1,20 +1,8 @@
-using System.Diagnostics.Eventing.Reader;
-using System.Text;
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace katalogproduktow
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -24,37 +12,57 @@ namespace katalogproduktow
 
         private void Oblicz(object sender, RoutedEventArgs e)
         {
-            // pobierz teskt z pola z cena i zmien go na liczbe 
-            // pobierz teskt z pola z iloscia i zmien go na liczbe 
-            //  jesli wartosci sa niepoprawne lub ujemne wypisz komunikat w pola wynik albo rzuc wyjatek 
-            // oblicz wartosc zamowienia i wypisz ja w polu wynik 
-
+            // Pobranie danych z pól
+            string nazwa = NazwaTextBox.Text;
+            string kategoria = KategorieComboBox.Text;
             string cenaText = CenaTextBox.Text;
+            string iloscText = IloscTextBox.Text;
 
+            bool promocja = PromocjaCheckBox.IsChecked == true;
+
+            // Sprawdzenie ceny
             if (!double.TryParse(cenaText, out double cena))
             {
                 WynikTextBlock.Text = "Cena jest niepoprawna!";
                 return;
             }
 
-            string iloscText = IloscTextBox.Text;
-
+            // Sprawdzenie ilości
             if (!int.TryParse(iloscText, out int ilosc))
             {
                 WynikTextBlock.Text = "Ilość jest niepoprawna!";
                 return;
             }
 
+            // Sprawdzenie wartości ujemnych
             if (cena < 0 || ilosc < 0)
             {
-                WynikTextBlock.Text = "Cena i ilość nie mogą być ujemne!";
+                WynikTextBlock.Text =
+                    "Cena i ilość nie mogą być ujemne!";
                 return;
             }
 
-            double wynik = cena * ilosc;
+            // Obliczenie wartości zamówienia
+            double wartoscZamowienia = cena * ilosc;
 
- 
-            WynikTextBlock.Text = $"Wartość zamówienia: {wynik:F2} zł";
+            // Naliczanie promocji 10%
+            double rabat = 0;
+
+            if (promocja)
+            {
+                rabat = wartoscZamowienia * 0.10;
+                wartoscZamowienia -= rabat;
+            }
+
+            // Wyświetlenie wszystkich informacji
+            WynikTextBlock.Text =
+                $"Nazwa produktu: {nazwa}\n" +
+                $"Kategoria: {kategoria}\n" +
+                $"Cena: {cena:F2} zł\n" +
+                $"Ilość: {ilosc}\n" +
+                $"Promocja: {(promocja ? "Tak" : "Nie")}\n" +
+                $"Rabat: {rabat:F2} zł\n" +
+                $"Wartość zamówienia: {wartoscZamowienia:F2} zł";
         }
     }
 }

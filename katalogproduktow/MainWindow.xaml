@@ -6,18 +6,38 @@
         xmlns:local="clr-namespace:katalogproduktow"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <StackPanel Margin="20,20,20,20">
-        <TextBlock Text="Nazwa produktu" />
-        <TextBox x:Name="NazwaTextBox" Margin="0,5,0,10" />
-        
-        <TextBlock Text="Cena" />
-        <TextBox x:Name="CenaTextBox" Margin="0,5,0,10" />
 
-        <TextBlock Text="Ilosc" />
-        <TextBox x:Name="IloscTextBox" Margin="0,5,0,10" />
+    <Grid Margin="20,20,20,20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" /> <!--tyle ile potrzebujesz-->
+            <ColumnDefinition Width="*" /> <!--tyle ile zostanie-->
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" /><!--nazwa-->
+            <RowDefinition Height="auto" /><!--cena-->
+            <RowDefinition Height="auto" /><!--ilość-->
+            <RowDefinition Height="auto" /><!--ComboBox-->
+            <RowDefinition Height="auto" /><!--ilość-->
+            <RowDefinition Height="auto" /><!--przycisk-->
+            <RowDefinition Height="*" /><!--wynik-->
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Nazwa produktu" Margin="0,0,10,0" />
+        <TextBox x:Name="NazwaTextBox" Grid.Row="0" Grid.Column="1" Margin="0,5,0,10" />
 
-        <Button x:Name="ObliczButton" Content="Oblicz wartosc" Click="Oblicz"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Cena" />
+        <TextBox x:Name="CenaTextBox" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" />
 
-        <TextBlock x:Name="WynikTextBlock" FontSize="16" />
-    </StackPanel>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Ilosc" />
+        <TextBox x:Name="IloscTextBox" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" />
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Kategoria" VerticalAlignment="Center" />
+        <ComboBox x:Name="KategorieComboBox" Grid.Row="3" Grid.Column="1" Margin="0,5,0,10" VerticalAlignment="Center" />
+
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Promocja" VerticalAlignment="Center" />
+        <CheckBox x:Name="PromocjaCheckBox" Grid.Row="4" Grid.Column="1" Margin="0,5,0,10" VerticalAlignment="Center" />
+
+        <Button x:Name="ObliczButton" Grid.Row="5" Grid.Column="0" Content="Oblicz wartosc" Click="Oblicz"/>
+
+        <TextBlock x:Name="WynikTextBlock" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" FontSize="16" />
+    </Grid>
 </Window>
