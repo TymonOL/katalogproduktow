@@ -1,11 +1,13 @@
 using System;
 using System.Windows;
+using System.Collections.ObjectModel;
+using System.Diagnostics.Eventing.Reader;
 
 namespace katalogproduktow
 {
     public partial class MainWindow : Window
     {
-        List<Produkt> produkty = new List<Produkt>();
+        ObservableCollection<Produkt> produkty = new ObservableCollection<Produkt>();
 
         public MainWindow()
         {
@@ -16,8 +18,8 @@ namespace katalogproduktow
             produkty.Add(new Produkt { Nazwa = "Koszula", Cena = 120, Ilosc = 10, Kategoria = "Odzież" });
             ListaProduktów.ItemsSource = produkty;
         }
-     
-       
+
+
         private void Oblicz(object sender, RoutedEventArgs e)
 
         {
@@ -72,6 +74,28 @@ namespace katalogproduktow
                 $"Promocja: {(promocja ? "Tak" : "Nie")}\n" +
                 $"Rabat: {rabat:F2} zł\n" +
                 $"Wartość zamówienia: {wartoscZamowienia:F2} zł";
+        }
+
+        private void DodajProdukt(object sender, RoutedEventArgs e)
+        {
+            string nazwa = NazwaTextBox.Text;
+            double cena = double.Parse(CenaTextBox.Text);
+            int ilosc = int.Parse(IloscTextBox.Text);
+            string kategoria = KategorieComboBox.SelectedItem as string ?? "brak kategorii";
+
+            produkty.Add(new Produkt { Nazwa = nazwa, Cena = cena, Ilosc = ilosc, Kategoria = kategoria });
+        }
+
+        private void UsunProdukt(object sender, RoutedEventArgs e)
+        {
+            if (ListaProduktów.SelectedItem is Produkt wybranyProdukt)
+            {
+                produkty.Remove(wybranyProdukt);
+            }
+            else
+            {
+                MessageBox.Show("Nie wybrano produktu do usunięcia.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
     }
