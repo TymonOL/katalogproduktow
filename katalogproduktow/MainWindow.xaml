@@ -19,7 +19,8 @@
             <RowDefinition Height="auto" /><!--ComboBox-->
             <RowDefinition Height="auto" /><!--ilość-->
             <RowDefinition Height="auto" /><!--przycisk-->
-            <RowDefinition Height="*" /><!--wynik-->
+            <RowDefinition Height="auto" /><!--wynik-->
+            <RowDefinition Height="*" /> <!--Lista produktów-->
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Text="Nazwa produktu" Margin="0,0,10,0" />
         <TextBox x:Name="NazwaTextBox" Grid.Row="0" Grid.Column="1" Margin="0,5,0,10" />
@@ -39,5 +40,7 @@
         <Button x:Name="ObliczButton" Grid.Row="5" Grid.Column="0" Content="Oblicz wartosc" Click="Oblicz"/>
 
         <TextBlock x:Name="WynikTextBlock" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" FontSize="16" />
+
+        <ListBox x:Name="ListaProduktów" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Margin=" 0,12,0,0"/>
     </Grid>
 </Window>

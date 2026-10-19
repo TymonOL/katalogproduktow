@@ -5,12 +5,21 @@ namespace katalogproduktow
 {
     public partial class MainWindow : Window
     {
+        List<Produkt> produkty = new List<Produkt>();
+
         public MainWindow()
         {
             InitializeComponent();
+            KategorieComboBox.ItemsSource = new string[] { "Elektronika", "Odzież", "Książki", "Meble" };
+            KategorieComboBox.SelectedIndex = 0;
+            produkty.Add(new Produkt { Nazwa = "Laptop", Cena = 2500, Ilosc = 5, Kategoria = "Elektronika" });
+            produkty.Add(new Produkt { Nazwa = "Koszula", Cena = 120, Ilosc = 10, Kategoria = "Odzież" });
+            ListaProduktów.ItemsSource = produkty;
         }
-
+     
+       
         private void Oblicz(object sender, RoutedEventArgs e)
+
         {
             // Pobranie danych z pól
             string nazwa = NazwaTextBox.Text;
@@ -64,5 +73,6 @@ namespace katalogproduktow
                 $"Rabat: {rabat:F2} zł\n" +
                 $"Wartość zamówienia: {wartoscZamowienia:F2} zł";
         }
+
     }
 }
