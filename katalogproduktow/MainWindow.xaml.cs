@@ -7,16 +7,17 @@ namespace katalogproduktow
 {
     public partial class MainWindow : Window
     {
-        ObservableCollection<Produkt> produkty = new ObservableCollection<Produkt>();
+        public ObservableCollection<Produkt> Produkty { get; set; } = new ObservableCollection<Produkt>();
 
         public MainWindow()
         {
             InitializeComponent();
             KategorieComboBox.ItemsSource = new string[] { "Elektronika", "Odzież", "Książki", "Meble" };
             KategorieComboBox.SelectedIndex = 0;
-            produkty.Add(new Produkt { Nazwa = "Laptop", Cena = 2500, Ilosc = 5, Kategoria = "Elektronika" });
-            produkty.Add(new Produkt { Nazwa = "Koszula", Cena = 120, Ilosc = 10, Kategoria = "Odzież" });
-            ListaProduktów.ItemsSource = produkty;
+            Produkty.Add(new Produkt { Nazwa = "Laptop", Cena = 2500, Ilosc = 5, Kategoria = "Elektronika" });
+            Produkty.Add(new Produkt { Nazwa = "Koszula", Cena = 120, Ilosc = 10, Kategoria = "Odzież" });
+            //ListaProduktów.ItemsSource = produkty;
+            DataContext = this;
         }
 
 
@@ -83,14 +84,14 @@ namespace katalogproduktow
             int ilosc = int.Parse(IloscTextBox.Text);
             string kategoria = KategorieComboBox.SelectedItem as string ?? "brak kategorii";
 
-            produkty.Add(new Produkt { Nazwa = nazwa, Cena = cena, Ilosc = ilosc, Kategoria = kategoria });
+            Produkty.Add(new Produkt { Nazwa = nazwa, Cena = cena, Ilosc = ilosc, Kategoria = kategoria });
         }
 
         private void UsunProdukt(object sender, RoutedEventArgs e)
         {
             if (ListaProduktów.SelectedItem is Produkt wybranyProdukt)
             {
-                produkty.Remove(wybranyProdukt);
+                Produkty.Remove(wybranyProdukt);
             }
             else
             {
