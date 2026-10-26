@@ -45,21 +45,27 @@
         <TextBlock x:Name="WynikTextBlock" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" FontSize="16" />
 
         <Button x:Name="DodajProduktButton" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Content="Dodaj produkt" Click="DodajProdukt"/>
-        <ListBox x:Name="ListaProduktów" ItemsSource="{Binding Produkty}" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin=" 0,12,0,0" >
-            <ListBox.ItemTemplate>
-                <DataTemplate >
-                    <StackPanel Margin=" 0,2">
-                        <!-- zeby rzeczy wyswietlaly sie obok siebie -->
-                        <TextBlock Text="{Binding Nazwa}" FontWeight="Bold" />
-                        <TextBlock>
-                                <Run Text="{Binding Kategoria}" />
-                                <Run Text=" - " />
-                                <Run Text="{Binding Cena, StringFormat={}{0:F2} zł}" />
-                        </TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <ListView x:Name="ListaProduktów" ItemsSource="{Binding Produkty}" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin=" 0,12,0,0" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Nazwa"
+                            DisplayMemberBinding="{Binding Nazwa}"
+                            Width="150"/>
+
+                    <GridViewColumn Header="Kategoria"
+                            DisplayMemberBinding="{Binding Kategoria}"
+                            Width="120"/>
+
+                    <GridViewColumn Header="Cena"
+                            DisplayMemberBinding="{Binding Cena, StringFormat={}{0:F2} zł}"
+                            Width="100"/>
+
+                    <GridViewColumn Header="Ilość"
+                            DisplayMemberBinding="{Binding Ilosc}"
+                            Width="80"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
 
         <Button x:Name="UsunProduktButton" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Content="Usuń produkt" Click="UsunProdukt"/>
