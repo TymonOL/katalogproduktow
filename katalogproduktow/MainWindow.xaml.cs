@@ -99,5 +99,13 @@ namespace katalogproduktow
             }
         }
 
+        private void PoleZaznaczone(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            Produkt p = ListaProduktów.SelectedItem as Produkt;
+            NazwaTextBox.Text = p.Nazwa;
+            CenaTextBox.Text = p.Cena.ToString("F2");
+            IloscTextBox.Text = p.Ilosc.ToString();
+
+        }
     }
 }
