@@ -40,12 +40,12 @@
         <TextBlock Grid.Row="4" Grid.Column="0" Text="Promocja" VerticalAlignment="Center" />
         <CheckBox x:Name="PromocjaCheckBox" Grid.Row="4" Grid.Column="1" Margin="0,5,0,10" VerticalAlignment="Center" />
         <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <Button x:Name="ObliczButton" Content="Oblicz Wartość" Click="Oblicz"/>
-                <Button x:Name="ZapiszButton" Content="Zapisz" Click="Zapisz" />
+            <Button x:Name="ObliczButton" Content="Oblicz Wartość" Click="Oblicz" Width="200"/>
+                <Button x:Name="ZapiszButton" Content="Zapisz" Click="Zapisz" Width="200" />
                     </StackPanel>
         
 
-            <Button x:Name="ObliczcButton" Grid.Row="5" Grid.Column="0" Content="Oblicz wartosc" Click="Oblicz"/>
+            
 
         <TextBlock x:Name="WynikTextBlock" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" FontSize="16" />
 

@@ -14,12 +14,16 @@ namespace katalogproduktow
             set { cena = value < 0 ? 0 : value; Zmiana(nameof(Cena)); }
         }
 
+        private int ilosc;
 
-        public int Ilosc 
-         {
-            get { return Ilosc; }
-         set { Ilosc = value< 0 ? 0 : value; Zmiana(nameof(Ilosc));
-}
+        public int Ilosc
+        {
+            get { return ilosc; }
+            set
+            {
+                ilosc = value < 0 ? 0 : value;
+                Zmiana(nameof(Ilosc));
+            }
         }
 
         public string Kategoria { get; set; } = "";
