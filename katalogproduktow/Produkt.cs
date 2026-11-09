@@ -1,6 +1,8 @@
-﻿namespace katalogproduktow
+﻿using System.ComponentModel;
+
+namespace katalogproduktow
 {
-    public class Produkt
+    public class Produkt : INotifyPropertyChanged
     {
         public string Nazwa { get; set; } = "";
 
@@ -9,11 +11,16 @@
         public double Cena
         {
             get { return cena; }
-            set { cena = value < 0 ? 0 : value; }
+            set { cena = value < 0 ? 0 : value; Zmiana(nameof(Cena)); }
         }
 
 
-        public int Ilosc { get; set; }
+        public int Ilosc 
+         {
+            get { return Ilosc; }
+         set { Ilosc = value< 0 ? 0 : value; Zmiana(nameof(Ilosc));
+}
+        }
 
         public string Kategoria { get; set; } = "";
 
@@ -21,6 +28,12 @@
         //{
         //    return $"{Nazwa} ({Kategoria}): {Cena:F2} zł, Ilość: {Ilosc}";
         //}
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        private void Zmiana(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
 

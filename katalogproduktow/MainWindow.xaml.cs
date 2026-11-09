@@ -91,21 +91,43 @@ namespace katalogproduktow
         {
             if (ListaProduktów.SelectedItem is Produkt wybranyProdukt)
             {
-                Produkty.Remove(wybranyProdukt);
-            }
-            else
-            {
-                MessageBox.Show("Nie wybrano produktu do usunięcia.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBoxResult wynik =
+                    MessageBox.Show($"Czy na pewno chcesz usunąć produkt: {wybranyProdukt.Nazwa}?",
+                    "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (wynik == MessageBoxResult.Yes)
+                {
+                    Produkty.Remove(wybranyProdukt);
+                }
+                else
+                {
+                    MessageBox.Show("Nie wybrano produktu do usunięcia.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
             }
         }
 
         private void PoleZaznaczone(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            Produkt p = ListaProduktów.SelectedItem as Produkt;
+            if(ListaProduktów.SelectedItem is not Produkt p) return;
+            // tego juz nie musimy sprawdzac bo w if sprawdzamy czy jest to Produkt 
+            //Produkt p = ListaProduktów.SelectedItem as Produkt;
             NazwaTextBox.Text = p.Nazwa;
             CenaTextBox.Text = p.Cena.ToString("F2");
             IloscTextBox.Text = p.Ilosc.ToString();
 
         }
+
+        private void Zapisz(object sender, RoutedEventArgs e)
+        {
+           if(ListaProduktów.SelectedItem is not Produkt p) return;
+            if (!double.TryParse(CenaTextBox.Text, out double cena) || cena < 0) return;
+            if (!int.TryParse(IloscTextBox.Text, out int ilosc) || ilosc < 0) return;
+            string nazwa = NazwaTextBox.Text;
+            p.Nazwa = nazwa;
+            p.Cena = cena;
+            p.Ilosc = ilosc;
+            WynikTextBlock.Text = $"Zapisano zmiany dla produktu: {p.Nazwa}";
+        }
+
     }
 }
